@@ -1,180 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Unknown Figures</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css" />
-    <style>
-      body {
-        background-color: #0d0d0d;
-        font-family: Arial, sans-serif;
-        color: #fff;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-      
-      h1 {
-        font-size: 2.5rem;
-        text-align: center;
-      }
-      
-      p {
-        font-size: 1.2rem;
-        text-align: center;
-        margin-bottom: 1rem;
-      }
-      
-      ul {
-        font-size: 1.2rem;
-        list-style: disc;
-        margin-left: 2rem;
-        margin-bottom: 1rem;
-      }
-      
-      button {
-        font-family: Arial, sans-serif;
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 4px;
-        background-color: #0f0f0f;
-        color: #fff;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      
-      button:hover {
-        background-color: #0c0c0c;
-      }
-      
-      #start-page {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      #game-page {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      #timer {
-        font-size: 3rem;
-        font-weight: bold;
-        margin: 2rem 0;
-      }
-      
-      #numbers {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-      }
-      
-      #buttons {
-        display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-      }
-      
-      #result {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-      }
-      
-      #reset-button {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-        margin-top: 1rem;
-      }
-      
-      .back-button {
-        background-color: #e64d4d;
-        margin-top: 1rem;
-      }
-      
-      .back-button:hover {
-        background-color: #c43c3c;
-      }
-      
-      button:hover {
-        background-color: #4d79e6;
-      }
-      
-      @media (max-width: 600px) {
-        h1 {
-          font-size: 2rem;
-        }
-      
-        p {
-          font-size: 1.1rem;
-          margin-bottom: 0.8rem;
-        }
-      
-        ul {
-          font-size: 1.1rem;
-          margin-left: 1.5rem;
-          margin-bottom: 0.8rem;
-        }
-      
-        button {
-          font-size: 0.9rem;
-          padding: 0.4rem 0.9rem;
-        }
-      
-        #timer {
-          font-size: 2.5rem;
-          margin: 1.5rem 0;
-        }
-      
-        #numbers {
-          font-size: 1.1rem;
-          margin-bottom: 0.8rem;
-        }
-      
-        #result {
-          font-size: 1.1rem;
-          margin-bottom: 0.8rem;
-        }
-      
-        #reset-button {
-          font-size: 0.9rem;
-          padding: 0.4rem 0.9rem;
-          margin-top: 0.8rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div id="start-page" class="text-center">
-        <h1>Unknown Figures</h1>
-        <p>Welcome to Unknown Figures! The game where you have to guess the number that the bots will pick. Here are the rules:</p>
-        <ul class="text-left">
-          <li>You have 60 seconds to make your selection.</li>
-          <li>The bots will each pick a number between 0 and 100.</li>
-          <li>Your number will be added to the average of the bot numbers.</li>
-          <li>The player whose number is closest to 80% of the average of all numbers wins.</li>
-        </ul>
-        <button id="start-button" class="btn btn-primary">Start Game</button>
-      </div>
-      <div id="game-page" class="text-center" style="display: none">
-        <h1>Unknown Figures</h1>
-        <p>Enter a number between 0 and 100 within 1 minute:</p>
-        <div id="timer" class="display-4 mb-4">60</div>
-        <div id="numbers"></div>
-        <div id="buttons" class="row"></div>
-        <div id="result" class="font-weight-bold mb-4"></div>
-        <button id="reset-button" class="btn btn-primary d-none">Reset Game</button>
-        <button id="back-button" class="btn back-button d-none">Back</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Unknown Figures</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div id="start-page" class="text-center">
+      <h1>Unknown Figures</h1>
+      <p>Welcome to Unknown Figures! The game where you have to guess the number that the bots will pick. Here are the rules:</p>
+      <ul class="text-left">
+        <li>You have 60 seconds to make your selection.</li>
+        <li>The bots will each pick a number between 0 and 100.</li>
+        <li>Your number will be added to the average of the bot numbers.</li>
+        <li>The player whose number is closest to 80% of the average of all numbers wins.</li>
+      </ul>
+      <button id="start-button" class="btn btn-primary">Start Game</button>
     </div>
-    <script src="script.js"></script>
-  </body>
+    <div id="game-page" class="text-center" style="display: none">
+      <h1>Unknown Figures</h1>
+      <p>Enter a number between 0 and 100 within 1 minute:</p>
+      <div id="timer" class="display-4 mb-4">60</div>
+      <div id="numbers"></div>
+      <div id="buttons" class="row"></div>
+      <div id="result" class="font-weight-bold mb-4"></div>
+      <button id="reset-button" class="btn btn-primary d-none">Reset Game</button>
+      <button id="back-button" class="btn back-button d-none">Back</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
 </html>
