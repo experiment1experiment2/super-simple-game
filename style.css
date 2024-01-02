@@ -1,8 +1,8 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: #f0f0f0;
 }
 
 .container {
@@ -11,41 +11,59 @@ body {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .page {
   text-align: center;
 }
 
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 10px;
-  font-size: 16px;
-  cursor: pointer;
+.modern-heading {
+  color: #3498db;
 }
 
-.btn-primary {
+.modern-text {
+  color: #555;
+  font-size: 18px;
+}
+
+.modern-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.btn-modern {
   background-color: #3498db;
   color: #fff;
   border: none;
   border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.back-button {
-  background-color: #e74c3c;
+.btn-modern:hover {
+  background-color: #2980b9;
 }
 
-.display-4 {
-  font-size: 2.5em;
+.modern-timer {
+  font-size: 3em;
   font-weight: bold;
+  color: #3498db;
 }
 
-.mb-4 {
-  margin-bottom: 1.5rem;
+.modern-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.font-weight-bold {
+.modern-result {
   font-weight: bold;
+  margin-top: 10px;
+  color: #555;
 }
