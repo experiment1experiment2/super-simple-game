@@ -2,16 +2,17 @@ document.addEventListener('DOMContentLoaded', function () {
   const startButton = document.getElementById('start-button');
   const startPage = document.getElementById('start-page');
   const gamePage = document.getElementById('game-page');
+  const submitButton = document.getElementById('submit-button');
   const resetButton = document.getElementById('reset-button');
   const backButton = document.getElementById('back-button');
   const timerElement = document.getElementById('timer');
-  const numbersElement = document.getElementById('numbers');
-  const buttonsElement = document.getElementById('buttons');
+  const userInput = document.getElementById('user-input');
   const resultElement = document.getElementById('result');
 
   let timer;
 
   startButton.addEventListener('click', startGame);
+  submitButton.addEventListener('click', submitGuess);
   resetButton.addEventListener('click', resetGame);
   backButton.addEventListener('click', goBack);
 
@@ -21,8 +22,11 @@ document.addEventListener('DOMContentLoaded', function () {
     resetButton.classList.remove('d-none');
     backButton.classList.remove('d-none');
     startTimer();
+  }
 
-    // Your game logic goes here
+  function submitGuess() {
+    // Handle user's guess and calculate result
+    // Display result in resultElement
   }
 
   function resetGame() {
@@ -31,6 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
     resetButton.classList.add('d-none');
     backButton.classList.add('d-none');
     resetTimer();
+    userInput.value = '';
+    resultElement.textContent = '';
   }
 
   function goBack() {
@@ -39,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
     resetButton.classList.add('d-none');
     backButton.classList.add('d-none');
     resetTimer();
+    userInput.value = '';
+    resultElement.textContent = '';
   }
 
   function startTimer() {
