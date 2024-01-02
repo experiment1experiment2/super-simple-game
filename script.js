@@ -1,45 +1,63 @@
-const startButton = document.getElementById("start-button");
-const gamePage = document.getElementById("game-page");
-const timerDisplay = document.getElementById("timer");
-const numbersDisplay = document.getElementById("numbers");
-const buttonsContainer = document.getElementById("buttons");
-const resultDisplay = document.getElementById("result");
-const resetButton = document.getElementById("reset-button");
-const backButton = document.getElementById("back-button");
+document.addEventListener('DOMContentLoaded', function () {
+  const startButton = document.getElementById('start-button');
+  const startPage = document.getElementById('start-page');
+  const gamePage = document.getElementById('game-page');
+  const resetButton = document.getElementById('reset-button');
+  const backButton = document.getElementById('back-button');
+  const timerElement = document.getElementById('timer');
+  const numbersElement = document.getElementById('numbers');
+  const buttonsElement = document.getElementById('buttons');
+  const resultElement = document.getElementById('result');
 
-let gameStarted = false;
-let timer = 60;
-let botNumbers = [];
-let playerNumber = null;
+  let timer;
 
-startButton.addEventListener("click", () => {
-  gamePage.style.display = "block";
-  startPage.style.display = "none";
-  generateBotNumbers();
-  createNumberButtons();
-  startGame();
+  startButton.addEventListener('click', startGame);
+  resetButton.addEventListener('click', resetGame);
+  backButton.addEventListener('click', goBack);
+
+  function startGame() {
+    startPage.style.display = 'none';
+    gamePage.style.display = 'block';
+    resetButton.classList.remove('d-none');
+    backButton.classList.remove('d-none');
+    startTimer();
+
+    // Your game logic goes here
+  }
+
+  function resetGame() {
+    gamePage.style.display = 'none';
+    startPage.style.display = 'block';
+    resetButton.classList.add('d-none');
+    backButton.classList.add('d-none');
+    resetTimer();
+  }
+
+  function goBack() {
+    gamePage.style.display = 'none';
+    startPage.style.display = 'block';
+    resetButton.classList.add('d-none');
+    backButton.classList.add('d-none');
+    resetTimer();
+  }
+
+  function startTimer() {
+    let seconds = 60;
+    timerElement.textContent = seconds;
+
+    timer = setInterval(function () {
+      seconds--;
+      timerElement.textContent = seconds;
+
+      if (seconds <= 0) {
+        clearInterval(timer);
+        // Handle timeout
+      }
+    }, 1000);
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timerElement.textContent = '60';
+  }
 });
-
-resetButton.addEventListener("click", () => {
-  resetGame();
-});
-
-backButton.addEventListener("click", () => {
-  gamePage.style.display = "none";
-  startPage.style.display = "block";
-  resetGame();
-});
-
-function startGame() {
-  gameStarted = true;
-  timerInterval = setInterval(() => {
-    timer--;
-    timerDisplay.textContent = timer;
-    if (timer === 0) {
-      endGame();
-    }
-  }, 1000);
-}
-
-// ... rest of the game logic functions (generateBotNumbers, createNumberButtons, handlePlayerClick, endGame, calculateWinner, resetGame)
-
