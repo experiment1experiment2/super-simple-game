@@ -46,11 +46,6 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.row {
-  display: flex;
-  justify-content: center;
-}
-
 .font-weight-bold {
   font-weight: bold;
 }
