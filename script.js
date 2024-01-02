@@ -25,8 +25,33 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function submitGuess() {
-    // Handle user's guess and calculate result
-    // Display result in resultElement
+    const userNumber = parseInt(userInput.value);
+    if (isNaN(userNumber) || userNumber < 0 || userNumber > 100) {
+      resultElement.textContent = 'Please enter a valid number between 0 and 100.';
+      return;
+    }
+
+    const bot1Number = Math.floor(Math.random() * 101);
+    const bot2Number = Math.floor(Math.random() * 101);
+
+    const average = (userNumber + bot1Number + bot2Number) / 3;
+
+    const userDifference = Math.abs(average * 0.8 - userNumber);
+    const bot1Difference = Math.abs(average * 0.8 - bot1Number);
+    const bot2Difference = Math.abs(average * 0.8 - bot2Number);
+
+    let winner;
+    if (userDifference < bot1Difference && userDifference < bot2Difference) {
+      winner = 'You';
+    } else if (bot1Difference < userDifference && bot1Difference < bot2Difference) {
+      winner = 'Bot 1';
+    } else {
+      winner = 'Bot 2';
+    }
+
+    resultElement.textContent = `Your guess: ${userNumber}, Bot 1: ${bot1Number}, Bot 2: ${bot2Number}. ${winner} wins!`;
+
+    clearInterval(timer);
   }
 
   function resetGame() {
@@ -59,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (seconds <= 0) {
         clearInterval(timer);
-        // Handle timeout
+        resultElement.textContent = 'Time is up! You lose.';
       }
     }, 1000);
   }
