@@ -9,25 +9,25 @@
 <body>
   <div class="container">
     <div id="start-page" class="page">
-      <h1>Unknown Figures</h1>
-      <p>Welcome to Unknown Figures! The game where you have to guess the number that the bots will pick. Here are the rules:</p>
-      <ul>
+      <h1 class="modern-heading">Unknown Figures</h1>
+      <p class="modern-text">Welcome to Unknown Figures! The game where you have to guess the number that the bots will pick. Here are the rules:</p>
+      <ul class="modern-list">
         <li>You have 60 seconds to make your selection.</li>
         <li>The bots will each pick a number between 0 and 100.</li>
         <li>Your number will be added to the average of the bot numbers.</li>
         <li>The player whose number is closest to 80% of the average of all numbers wins.</li>
       </ul>
-      <button id="start-button" class="btn btn-primary">Start Game</button>
+      <button id="start-button" class="btn btn-modern">Start Game</button>
     </div>
     <div id="game-page" class="page" style="display: none;">
-      <h1>Unknown Figures</h1>
-      <p>Enter a number between 0 and 100 within 1 minute:</p>
-      <div id="timer" class="display-4 mb-4">60</div>
-      <input type="number" id="user-input" class="mb-4" min="0" max="100" required>
-      <button id="submit-button" class="btn btn-primary">Submit</button>
-      <div id="result" class="font-weight-bold mb-4"></div>
-      <button id="reset-button" class="btn btn-primary d-none">Reset Game</button>
-      <button id="back-button" class="btn back-button d-none">Back</button>
+      <h1 class="modern-heading">Unknown Figures</h1>
+      <p class="modern-text">Enter a number between 0 and 100 within 1 minute:</p>
+      <div id="timer" class="modern-timer">60</div>
+      <input type="number" id="user-input" class="modern-input" min="0" max="100" required>
+      <button id="submit-button" class="btn btn-modern">Submit</button>
+      <div id="result" class="modern-result"></div>
+      <button id="reset-button" class="btn btn-modern d-none">Reset Game</button>
+      <button id="back-button" class="btn back-button btn-modern d-none">Back</button>
     </div>
   </div>
   <script src="script.js"></script>
