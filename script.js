@@ -1,16 +1,14 @@
-// JavaScript
 document.addEventListener('DOMContentLoaded', function () {
   const startButton = document.getElementById('start-button');
   const startPage = document.getElementById('start-page');
   const gamePage = document.getElementById('game-page');
   const submitButton = document.getElementById('submit-button');
   const resetButton = document.getElementById('reset-button');
+  const timerElement = document.getElementById('timer');
   const resultElement = document.getElementById('result');
   const numberButtonsContainer = document.getElementById('number-buttons');
 
   const TIMER_DURATION = 60;
-  const WINNING_THRESHOLD_PERCENTAGE = 0.8;
-  const NUM_BOTS = 3;
   let timer;
 
   startButton.addEventListener('click', startGame);
@@ -18,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
   resetButton.addEventListener('click', resetGame);
 
   function startGame() {
-    hideElement(startPage);
-    showElement(gamePage);
+    startPage.style.display = 'none';
+    gamePage.style.display = 'block';
     resetButton.classList.remove('d-none');
     startTimer();
     createNumberButtons();
@@ -27,24 +25,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function createNumberButtons() {
     for (let i = 0; i <= 100; i++) {
-      const button = createNumberButton(i);
+      const button = document.createElement('button');
+      button.textContent = i;
+      button.addEventListener('click', function () {
+        submitButton.disabled = false;
+        clearSelectedButtons();
+        button.classList.add('selected');
+      });
       numberButtonsContainer.appendChild(button);
     }
   }
 
-  function createNumberButton(number) {
-    const button = document.createElement('button');
-    button.textContent = number;
-    button.addEventListener('click', function () {
-      submitButton.disabled = false;
-      clearSelectedButtons();
-      button.classList.add('selected');
-    });
-    return button;
-  }
-
   function clearSelectedButtons() {
-    document.querySelectorAll('.number-buttons button.selected').forEach(button => button.classList.remove('selected'));
+    const buttons = document.querySelectorAll('.number-buttons button');
+    buttons.forEach(button => button.classList.remove('selected'));
   }
 
   function submitGuess() {
@@ -57,12 +51,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const userGuess = parseInt(selectedButton.textContent);
     const botAverage = calculateBotAverage();
-    const winningThreshold = WINNING_THRESHOLD_PERCENTAGE * botAverage;
+    const winningThreshold = 0.8 * botAverage;
 
-    const botAnswers = generateBotAnswers();
+    const bot1 = Math.floor(Math.random() * 101);
+    const bot2 = Math.floor(Math.random() * 101);
+    const bot3 = Math.floor(Math.random() * 101);
+
+    const botAnswers = `Bot 1: ${bot1}, Bot 2: ${bot2}, Bot 3: ${bot3}`;
     const userAnswer = `Your guess: ${userGuess}`;
 
-    if (isUserWinner(userGuess, botAverage, winningThreshold)) {
+    if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
       resultElement.textContent = `Congratulations! You win. ${userAnswer} | ${botAnswers}`;
     } else {
       resultElement.textContent = `Sorry, you lose. ${userAnswer} | ${botAnswers}`;
@@ -73,21 +71,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function calculateBotAverage() {
-    return Array.from({ length: NUM_BOTS }, () => Math.floor(Math.random() * 101))
-      .reduce((sum, num) => sum + num, 0) / NUM_BOTS;
-  }
+    const bot1 = Math.floor(Math.random() * 101);
+    const bot2 = Math.floor(Math.random() * 101);
+    const bot3 = Math.floor(Math.random() * 101);
 
-  function generateBotAnswers() {
-    return Array.from({ length: NUM_BOTS }, () => `Bot ${Math.floor(Math.random() * 101)}`).join(', ');
-  }
-
-  function isUserWinner(userGuess, botAverage, winningThreshold) {
-    return Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold);
+    return (bot1 + bot2 + bot3) / 3;
   }
 
   function resetGame() {
-    showElement(startPage);
-    hideElement(gamePage);
+    gamePage.style.display = 'none';
+    startPage.style.display = 'block';
     resetButton.classList.add('d-none');
     resetTimer();
     resultElement.textContent = '';
@@ -96,14 +89,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function clearNumberButtons() {
     numberButtonsContainer.innerHTML = '';
-  }
-
-  function showElement(element) {
-    element.style.display = 'block';
-  }
-
-  function hideElement(element) {
-    element.style.display = 'none';
   }
 
   function startTimer() {
