@@ -45,8 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function clearSelectedButtons() {
-    const buttons = document.querySelectorAll('.number-buttons button');
-    buttons.forEach(button => button.classList.remove('selected'));
+    document.querySelectorAll('.number-buttons button.selected').forEach(button => button.classList.remove('selected'));
   }
 
   function submitGuess() {
@@ -75,13 +74,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function calculateBotAverage() {
-    const botNumbers = Array.from({ length: NUM_BOTS }, () => Math.floor(Math.random() * 101));
-    return botNumbers.reduce((sum, num) => sum + num, 0) / NUM_BOTS;
+    return Array.from({ length: NUM_BOTS }, () => Math.floor(Math.random() * 101))
+      .reduce((sum, num) => sum + num, 0) / NUM_BOTS;
   }
 
   function generateBotAnswers() {
-    const botNumbers = Array.from({ length: NUM_BOTS }, () => Math.floor(Math.random() * 101));
-    return botNumbers.map((bot, index) => `Bot ${index + 1}: ${bot}`).join(', ');
+    return Array.from({ length: NUM_BOTS }, () => `Bot ${Math.floor(Math.random() * 101)}`).join(', ');
   }
 
   function isUserWinner(userGuess, botAverage, winningThreshold) {
