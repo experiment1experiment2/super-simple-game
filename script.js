@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const resetButton = document.getElementById('reset-button');
   const timerElement = document.getElementById('timer');
   const resultElement = document.getElementById('result');
-  const numberButtonsContainer = document.getElementById('number-buttons');
+  const userNumberInput = document.getElementById('user-number');
 
   const TIMER_DURATION = 60;
   let timer;
@@ -20,36 +20,21 @@ document.addEventListener('DOMContentLoaded', function () {
     gamePage.style.display = 'block';
     resetButton.classList.remove('d-none');
     startTimer();
-    createNumberButtons();
+    createNumberInput();
   }
 
-  function createNumberButtons() {
-    for (let i = 0; i <= 100; i++) {
-      const button = document.createElement('button');
-      button.textContent = i;
-      button.addEventListener('click', function () {
-        submitButton.disabled = false;
-        clearSelectedButtons();
-        button.classList.add('selected');
-      });
-      numberButtonsContainer.appendChild(button);
-    }
-  }
-
-  function clearSelectedButtons() {
-    const buttons = document.querySelectorAll('.number-buttons button');
-    buttons.forEach(button => button.classList.remove('selected'));
+  function createNumberInput() {
+    userNumberInput.disabled = false;
   }
 
   function submitGuess() {
-    const selectedButton = document.querySelector('.number-buttons button.selected');
+    const userGuess = parseInt(userNumberInput.value);
 
-    if (!selectedButton) {
-      resultElement.textContent = 'Please select a number first.';
+    if (isNaN(userGuess) || userGuess < 0 || userGuess > 100) {
+      resultElement.textContent = 'Please enter a valid number between 0 and 100.';
       return;
     }
 
-    const userGuess = parseInt(selectedButton.textContent);
     const botAverage = calculateBotAverage();
     const winningThreshold = 0.8 * botAverage;
 
@@ -84,11 +69,12 @@ document.addEventListener('DOMContentLoaded', function () {
     resetButton.classList.add('d-none');
     resetTimer();
     resultElement.textContent = '';
-    clearNumberButtons();
+    clearNumberInput();
   }
 
-  function clearNumberButtons() {
-    numberButtonsContainer.innerHTML = '';
+  function clearNumberInput() {
+    userNumberInput.value = '';
+    userNumberInput.disabled = true;
   }
 
   function startTimer() {
