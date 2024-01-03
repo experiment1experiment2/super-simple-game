@@ -36,9 +36,32 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function submitGuess() {
-    // Your existing submitGuess function logic here
-    // For example, you can add console.log to check if it's being called
-    console.log('Submit button clicked');
+    const userGuess = parseInt(userInput.value);
+
+    if (isNaN(userGuess) || userGuess < 0 || userGuess > 100) {
+      resultElement.textContent = 'Please enter a valid number between 0 and 100.';
+      return;
+    }
+
+    const botAverage = calculateBotAverage();
+    const winningThreshold = 0.8 * botAverage;
+
+    if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
+      resultElement.textContent = 'Congratulations! You win!';
+    } else {
+      resultElement.textContent = 'Sorry, you lose. Try again!';
+    }
+
+    clearInterval(timer);
+    disableSubmitButton();
+  }
+
+  function calculateBotAverage() {
+    const bot1 = Math.floor(Math.random() * 101);
+    const bot2 = Math.floor(Math.random() * 101);
+    const bot3 = Math.floor(Math.random() * 101);
+
+    return (bot1 + bot2 + bot3) / 3;
   }
 
   function resetGame() {
