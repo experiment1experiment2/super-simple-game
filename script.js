@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const timerElement = document.getElementById('timer');
   const resultElement = document.getElementById('result');
   const numberButtonsContainer = document.getElementById('number-buttons');
-  const userInput = document.getElementById('user-input'); // assuming you have an input field for user input
+  const userInput = document.getElementById('user-input');
 
-  const TIMER_DURATION = 60; // Constant for initial timer value
+  const TIMER_DURATION = 60;
   let timer;
 
   startButton.addEventListener('click', startGame);
