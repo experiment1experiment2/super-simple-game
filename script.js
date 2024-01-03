@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const timerElement = document.getElementById('timer');
   const resultElement = document.getElementById('result');
   const userNumberInput = document.getElementById('user-number');
+  const startPage = document.getElementById('start-page');
+  const gamePage = document.getElementById('game-page');
 
   const TIMER_DURATION = 60;
   let timer;
@@ -14,9 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
   resetButton.addEventListener('click', resetGame);
 
   function startGame() {
+    startPage.style.display = 'none';
+    gamePage.style.display = 'block';
     startTimer();
     resetResult();
-    userNumberInput.value = '';
     enableInput();
     submitButton.disabled = true;
   }
@@ -50,6 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function resetGame() {
+    gamePage.style.display = 'none';
+    startPage.style.display = 'block';
     resetTimer();
     resetResult();
     enableInput();
