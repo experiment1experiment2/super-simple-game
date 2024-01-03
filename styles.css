@@ -45,11 +45,13 @@ body {
   font-size: 2em;
   font-weight: bold;
   margin-bottom: 1.5rem;
+  color: #3498db;
 }
 
 .result {
   font-weight: bold;
   margin-bottom: 1.5rem;
+  color: #e74c3c;
 }
 
 /* Styles for number buttons */
@@ -90,4 +92,3 @@ body {
     padding: 12px;
   }
 }
-
