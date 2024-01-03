@@ -25,6 +25,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function createNumberInput() {
     userNumberInput.disabled = false;
+    userNumberInput.addEventListener('input', handleNumberInput);
+    submitButton.disabled = true;
+  }
+
+  function handleNumberInput() {
+    const userGuess = parseInt(userNumberInput.value);
+
+    if (isNaN(userGuess) || userGuess < 0 || userGuess > 100) {
+      userNumberInput.setCustomValidity('Please enter a valid number between 0 and 100.');
+      submitButton.disabled = true;
+    } else {
+      userNumberInput.setCustomValidity('');
+      submitButton.disabled = false;
+    }
+
+    userNumberInput.reportValidity();
   }
 
   function submitGuess() {
@@ -75,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function clearNumberInput() {
     userNumberInput.value = '';
     userNumberInput.disabled = true;
+    submitButton.disabled = true;
   }
 
   function startTimer() {
