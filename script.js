@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const button = document.createElement('button');
       button.textContent = i;
       button.addEventListener('click', function () {
-        submitButton.disabled = false; // Enable submit button when a number is selected
+        submitButton.disabled = false;
         clearSelectedButtons();
         button.classList.add('selected');
       });
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function submitGuess() {
     const selectedButton = document.querySelector('.number-buttons button.selected');
-    
+
     if (!selectedButton) {
       resultElement.textContent = 'Please select a number first.';
       return;
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const botAnswers = `Bot 1: ${bot1}, Bot 2: ${bot2}, Bot 3: ${bot3}`;
     const userAnswer = `Your guess: ${userGuess}`;
-    
+
     if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
       resultElement.textContent = `Congratulations! You win. ${userAnswer} | ${botAnswers}`;
     } else {
