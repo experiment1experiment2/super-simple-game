@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 600px;
   margin: 20px auto;
   background-color: #fff;
   padding: 20px;
@@ -42,7 +42,6 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.timer,
 .result {
   font-weight: bold;
   margin-bottom: 1.5rem;
