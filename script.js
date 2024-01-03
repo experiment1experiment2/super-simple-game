@@ -1,118 +1,94 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const startButton = document.getElementById('start-button');
-  const startPage = document.getElementById('start-page');
-  const gamePage = document.getElementById('game-page');
-  const submitButton = document.getElementById('submit-button');
-  const resetButton = document.getElementById('reset-button');
-  const timerElement = document.getElementById('timer');
-  const resultElement = document.getElementById('result');
-  const numberButtonsContainer = document.getElementById('number-buttons');
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
 
-  const TIMER_DURATION = 60;
-  let timer;
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
 
-  startButton.addEventListener('click', startGame);
-  submitButton.addEventListener('click', submitGuess);
-  resetButton.addEventListener('click', resetGame);
+.page {
+  text-align: center;
+}
 
-  function startGame() {
-    startPage.style.display = 'none';
-    gamePage.style.display = 'block';
-    resetButton.classList.remove('d-none');
-    startTimer();
-    createNumberButtons();
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+  background-color: #95a5a6;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.timer {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #3498db;
+}
+
+.result {
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #e74c3c;
+}
+
+/* Styles for number buttons */
+.number-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.number-buttons button {
+  margin: 8px;
+  padding: 14px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.number-buttons button.selected {
+  background-color: #2c3e50;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    max-width: 90%;
   }
 
-  function createNumberButtons() {
-    for (let i = 0; i <= 100; i++) {
-      const button = document.createElement('button');
-      button.textContent = i;
-      button.addEventListener('click', function () {
-        submitButton.disabled = false;
-        clearSelectedButtons();
-        button.classList.add('selected');
-      });
-      numberButtonsContainer.appendChild(button);
-    }
+  .btn {
+    padding: 12px 20px;
   }
 
-  function clearSelectedButtons() {
-    const buttons = document.querySelectorAll('.number-buttons button');
-    buttons.forEach(button => button.classList.remove('selected'));
+  .number-buttons button {
+    margin: 6px;
+    padding: 12px;
   }
-
-  function submitGuess() {
-    const selectedButton = document.querySelector('.number-buttons button.selected');
-
-    if (!selectedButton) {
-      resultElement.textContent = 'Please select a number first.';
-      return;
-    }
-
-    const userGuess = parseInt(selectedButton.textContent);
-    const botAverage = calculateBotAverage();
-    const winningThreshold = 0.8 * botAverage;
-
-    const bot1 = Math.floor(Math.random() * 101);
-    const bot2 = Math.floor(Math.random() * 101);
-    const bot3 = Math.floor(Math.random() * 101);
-
-    const botAnswers = `Bot 1: ${bot1}, Bot 2: ${bot2}, Bot 3: ${bot3}`;
-    const userAnswer = `Your guess: ${userGuess}`;
-
-    if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
-      resultElement.textContent = `Congratulations! You win. ${userAnswer} | ${botAnswers}`;
-    } else {
-      resultElement.textContent = `Sorry, you lose. ${userAnswer} | ${botAnswers}`;
-    }
-
-    clearInterval(timer);
-    disableSubmitButton();
-  }
-
-  function calculateBotAverage() {
-    const bot1 = Math.floor(Math.random() * 101);
-    const bot2 = Math.floor(Math.random() * 101);
-    const bot3 = Math.floor(Math.random() * 101);
-
-    return (bot1 + bot2 + bot3) / 3;
-  }
-
-  function resetGame() {
-    gamePage.style.display = 'none';
-    startPage.style.display = 'block';
-    resetButton.classList.add('d-none');
-    resetTimer();
-    resultElement.textContent = '';
-    clearNumberButtons();
-  }
-
-  function clearNumberButtons() {
-    numberButtonsContainer.innerHTML = '';
-  }
-
-  function startTimer() {
-    let seconds = TIMER_DURATION;
-    timerElement.textContent = seconds;
-
-    timer = setInterval(function () {
-      seconds--;
-      timerElement.textContent = seconds;
-
-      if (seconds <= 0) {
-        clearInterval(timer);
-        resultElement.textContent = 'Time is up! You lose.';
-        disableSubmitButton();
-      }
-    }, 1000);
-  }
-
-  function resetTimer() {
-    clearInterval(timer);
-    timerElement.textContent = TIMER_DURATION;
-  }
-
-  function disableSubmitButton() {
-    submitButton.disabled = true;
-  }
-});
+}
