@@ -1,43 +1,44 @@
 body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
 }
 
 .container {
-  max-width: 800px;
-  margin: 20px auto;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
 
 .page {
-  text-align: center;
-  margin-bottom: 40px;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .btn {
-  border-radius: 12px;
+    border-radius: 12px;
 }
 
-.timer, .result {
-  margin-bottom: 20px;
+.timer,
+.result {
+    margin-bottom: 20px;
 }
 
 #user-guess {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 @media screen and (max-width: 600px) {
-  .container {
-    max-width: 90%;
-  }
+    .container {
+        max-width: 90%;
+    }
 
-  .btn {
-    padding: 12px 20px;
-  }
+    .btn {
+        padding: 12px 20px;
+    }
 }
