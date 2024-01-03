@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const gamePage = document.getElementById('game-page');
   const submitButton = document.getElementById('submit-button');
   const resetButton = document.getElementById('reset-button');
-  const timerElement = document.getElementById('timer');
   const resultElement = document.getElementById('result');
   const numberButtonsContainer = document.getElementById('number-buttons');
 
