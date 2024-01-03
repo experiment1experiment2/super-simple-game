@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const resultElement = document.getElementById('result');
   const numberButtonsContainer = document.getElementById('number-buttons');
 
+  const TIMER_DURATION = 60; // Constant for initial timer value
   let timer;
 
   startButton.addEventListener('click', startGame);
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function startTimer() {
-    let seconds = 60;
+    let seconds = TIMER_DURATION;
     timerElement.textContent = seconds;
 
     timer = setInterval(function () {
@@ -62,12 +63,17 @@ document.addEventListener('DOMContentLoaded', function () {
       if (seconds <= 0) {
         clearInterval(timer);
         resultElement.textContent = 'Time is up! You lose.';
+        disableSubmitButton();
       }
     }, 1000);
   }
 
   function resetTimer() {
     clearInterval(timer);
-    timerElement.textContent = '60';
+    timerElement.textContent = TIMER_DURATION;
+  }
+
+  function disableSubmitButton() {
+    submitButton.disabled = true;
   }
 });
