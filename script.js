@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
   const startButton = document.getElementById('start-button');
-  const startPage = document.getElementById('start-page');
-  const gamePage = document.getElementById('game-page');
   const submitButton = document.getElementById('submit-button');
   const resetButton = document.getElementById('reset-button');
   const timerElement = document.getElementById('timer');
@@ -16,12 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
   resetButton.addEventListener('click', resetGame);
 
   function startGame() {
-    startPage.style.display = 'none';
-    gamePage.style.display = 'block';
-    resetButton.classList.remove('d-none');
     startTimer();
+    resetResult();
     userNumberInput.value = '';
-    userNumberInput.removeAttribute('readonly');
+    enableInput();
     submitButton.disabled = true;
   }
 
@@ -36,11 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const botAverage = calculateBotAverage();
     const winningThreshold = 0.8 * botAverage;
 
-    const bot1 = Math.floor(Math.random() * 101);
-    const bot2 = Math.floor(Math.random() * 101);
-    const bot3 = Math.floor(Math.random() * 101);
-
-    const botAnswers = `Bot 1: ${bot1}, Bot 2: ${bot2}, Bot 3: ${bot3}`;
+    const botAnswers = `Bot 1: ${Math.floor(Math.random() * 101)}, Bot 2: ${Math.floor(Math.random() * 101)}, Bot 3: ${Math.floor(Math.random() * 101)}`;
     const userAnswer = `Your guess: ${userGuess}`;
 
     if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
@@ -50,24 +42,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     clearInterval(timer);
-    submitButton.disabled = true;
-    userNumberInput.setAttribute('readonly', 'readonly');
+    disableInput();
   }
 
   function calculateBotAverage() {
-    const bot1 = Math.floor(Math.random() * 101);
-    const bot2 = Math.floor(Math.random() * 101);
-    const bot3 = Math.floor(Math.random() * 101);
-
-    return (bot1 + bot2 + bot3) / 3;
+    return (Math.floor(Math.random() * 101) + Math.floor(Math.random() * 101) + Math.floor(Math.random() * 101)) / 3;
   }
 
   function resetGame() {
-    gamePage.style.display = 'none';
-    startPage.style.display = 'block';
-    resetButton.classList.add('d-none');
     resetTimer();
-    resultElement.textContent = '';
+    resetResult();
+    enableInput();
+    userNumberInput.value = '';
+    submitButton.disabled = true;
   }
 
   function startTimer() {
@@ -81,8 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (seconds <= 0) {
         clearInterval(timer);
         resultElement.textContent = 'Time is up! You lose.';
-        userNumberInput.setAttribute('readonly', 'readonly');
-        submitButton.disabled = true;
+        disableInput();
       }
     }, 1000);
   }
@@ -90,5 +76,18 @@ document.addEventListener('DOMContentLoaded', function () {
   function resetTimer() {
     clearInterval(timer);
     timerElement.textContent = TIMER_DURATION;
+  }
+
+  function resetResult() {
+    resultElement.textContent = '';
+  }
+
+  function enableInput() {
+    userNumberInput.removeAttribute('readonly');
+    userNumberInput.focus();
+  }
+
+  function disableInput() {
+    userNumberInput.setAttribute('readonly', 'readonly');
   }
 });
