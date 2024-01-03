@@ -4,10 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const gamePage = document.getElementById('game-page');
   const submitButton = document.getElementById('submit-button');
   const resetButton = document.getElementById('reset-button');
-  const backButton = document.getElementById('back-button');  // Keep this line for resetting the game
   const timerElement = document.getElementById('timer');
-  const userInput = document.getElementById('user-input');
   const resultElement = document.getElementById('result');
+  const numberButtonsContainer = document.getElementById('number-buttons');
 
   let timer;
 
@@ -19,8 +18,19 @@ document.addEventListener('DOMContentLoaded', function () {
     startPage.style.display = 'none';
     gamePage.style.display = 'block';
     resetButton.classList.remove('d-none');
-    backButton.style.display = 'inline-block';  // Show the back button
     startTimer();
+    createNumberButtons();
+  }
+
+  function createNumberButtons() {
+    for (let i = 0; i <= 100; i += 10) {
+      const button = document.createElement('button');
+      button.textContent = i;
+      button.addEventListener('click', function () {
+        userInput.value = i;
+      });
+      numberButtonsContainer.appendChild(button);
+    }
   }
 
   function submitGuess() {
@@ -31,17 +41,33 @@ document.addEventListener('DOMContentLoaded', function () {
     gamePage.style.display = 'none';
     startPage.style.display = 'block';
     resetButton.classList.add('d-none');
-    backButton.style.display = 'none';  // Hide the back button
     resetTimer();
     userInput.value = '';
     resultElement.textContent = '';
+    clearNumberButtons();
+  }
+
+  function clearNumberButtons() {
+    numberButtonsContainer.innerHTML = '';
   }
 
   function startTimer() {
-    // Your existing startTimer function
+    let seconds = 60;
+    timerElement.textContent = seconds;
+
+    timer = setInterval(function () {
+      seconds--;
+      timerElement.textContent = seconds;
+
+      if (seconds <= 0) {
+        clearInterval(timer);
+        resultElement.textContent = 'Time is up! You lose.';
+      }
+    }, 1000);
   }
 
   function resetTimer() {
-    // Your existing resetTimer function
+    clearInterval(timer);
+    timerElement.textContent = '60';
   }
 });
