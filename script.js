@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const timerElement = document.getElementById('timer');
   const resultElement = document.getElementById('result');
   const numberButtonsContainer = document.getElementById('number-buttons');
-  const userInput = document.getElementById('user-input');
 
   const TIMER_DURATION = 60;
   let timer;
@@ -29,27 +28,42 @@ document.addEventListener('DOMContentLoaded', function () {
       const button = document.createElement('button');
       button.textContent = i;
       button.addEventListener('click', function () {
-        userInput.value = i;
+        submitButton.disabled = false; // Enable submit button when a number is selected
+        clearSelectedButtons();
+        button.classList.add('selected');
       });
       numberButtonsContainer.appendChild(button);
     }
   }
 
-  function submitGuess() {
-    const userGuess = parseInt(userInput.value);
+  function clearSelectedButtons() {
+    const buttons = document.querySelectorAll('.number-buttons button');
+    buttons.forEach(button => button.classList.remove('selected'));
+  }
 
-    if (isNaN(userGuess) || userGuess < 0 || userGuess > 100) {
-      resultElement.textContent = 'Please enter a valid number between 0 and 100.';
+  function submitGuess() {
+    const selectedButton = document.querySelector('.number-buttons button.selected');
+    
+    if (!selectedButton) {
+      resultElement.textContent = 'Please select a number first.';
       return;
     }
 
+    const userGuess = parseInt(selectedButton.textContent);
     const botAverage = calculateBotAverage();
     const winningThreshold = 0.8 * botAverage;
 
+    const bot1 = Math.floor(Math.random() * 101);
+    const bot2 = Math.floor(Math.random() * 101);
+    const bot3 = Math.floor(Math.random() * 101);
+
+    const botAnswers = `Bot 1: ${bot1}, Bot 2: ${bot2}, Bot 3: ${bot3}`;
+    const userAnswer = `Your guess: ${userGuess}`;
+    
     if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
-      resultElement.textContent = 'Congratulations! You win!';
+      resultElement.textContent = `Congratulations! You win. ${userAnswer} | ${botAnswers}`;
     } else {
-      resultElement.textContent = 'Sorry, you lose. Try again!';
+      resultElement.textContent = `Sorry, you lose. ${userAnswer} | ${botAnswers}`;
     }
 
     clearInterval(timer);
@@ -69,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
     startPage.style.display = 'block';
     resetButton.classList.add('d-none');
     resetTimer();
-    userInput.value = '';
     resultElement.textContent = '';
     clearNumberButtons();
   }
