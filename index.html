@@ -4,31 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unknown Figures</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <div id="start-page" class="page">
-      <h1>Unknown Figures</h1>
-      <p>Welcome to Unknown Figures! The game where you have to guess the number that the bots will pick. Here are the rules:</p>
-      <ul>
+      <h1 class="display-4">Unknown Figures</h1>
+      <p class="lead">Welcome to Unknown Figures! The game where you have to guess the number that the bots will pick. Here are the rules:</p>
+      <ul class="list-unstyled">
         <li>You have 60 seconds to make your selection.</li>
         <li>The bots will each pick a number between 0 and 100.</li>
         <li>Your number will be added to the average of the bot numbers.</li>
         <li>The player whose number is closest to 80% of the average of all numbers wins.</li>
       </ul>
-      <button id="start-button" class="btn btn-primary">Start Game</button>
+      <button id="start-button" class="btn btn-primary btn-lg">Start Game</button>
     </div>
     <div id="game-page" class="page" style="display: none;">
-      <h1>Unknown Figures</h1>
-      <label for="user-number">Enter a number between 0 and 100:</label>
-      <input type="number" id="user-number" min="0" max="100" required>
-      <button id="submit-button" class="btn btn-primary" disabled>Submit</button>
-      <div id="timer" class="timer">60</div>
-      <div id="result" class="result"></div>
-      <button id="reset-button" class="btn btn-secondary">Reset Game</button>
+      <h1 class="display-4">Unknown Figures</h1>
+      <p class="lead">Choose a number between 0 and 100:</p>
+      <div id="number-buttons" class="number-buttons"></div>
+      <div id="timer" class="timer display-2">60</div>
+      <button id="submit-button" class="btn btn-primary btn-lg" disabled>Submit</button>
+      <div id="result" class="result h3"></div>
+      <button id="reset-button" class="btn btn-secondary btn-lg">Reset Game</button>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1"></script>
   <script src="script.js"></script>
 </body>
 </html>
