@@ -25,12 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function createNumberInput() {
         const input = document.createElement('input');
-        input.type = 'number';
+        input.type = 'text';
         input.id = 'user-guess';
         input.classList.add('form-control');
-        input.placeholder = 'Enter a number';
-        input.min = 0;
-        input.max = 100;
+        input.placeholder = 'Enter a number between 0 and 100';
 
         numberButtonsContainer.appendChild(input);
     }
