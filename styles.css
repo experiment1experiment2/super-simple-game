@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
@@ -33,19 +33,29 @@ body {
   border-radius: 4px;
 }
 
+.btn-secondary {
+  background-color: #95a5a6;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
 .back-button {
   background-color: #e74c3c;
 }
 
-.display-4 {
-  font-size: 2.5em;
+.timer {
+  font-size: 2em;
   font-weight: bold;
+  margin-bottom: 1rem;
 }
 
-.mb-4 {
-  margin-bottom: 1.5rem;
+.user-input {
+  padding: 8px;
+  font-size: 16px;
 }
 
-.font-weight-bold {
+.result {
   font-weight: bold;
+  margin-bottom: 1rem;
 }
