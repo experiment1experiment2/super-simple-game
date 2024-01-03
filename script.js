@@ -1,120 +1,112 @@
 document.addEventListener('DOMContentLoaded', function () {
     const startButton = document.getElementById('start-button');
-  const startPage = document.getElementById('start-page');
-  const gamePage = document.getElementById('game-page');
-  const submitButton = document.getElementById('submit-button');
-  const resetButton = document.getElementById('reset-button');
-  const timerElement = document.getElementById('timer');
-  const resultElement = document.getElementById('result');
-  const numberButtonsContainer = document.getElementById('number-buttons');
+    const startPage = document.getElementById('start-page');
+    const gamePage = document.getElementById('game-page');
+    const submitButton = document.getElementById('submit-button');
+    const resetButton = document.getElementById('reset-button');
+    const timerElement = document.getElementById('timer');
+    const resultElement = document.getElementById('result');
+    const numberButtonsContainer = document.getElementById('number-buttons');
 
-  const TIMER_DURATION = 60;
-  let timer;
+    const TIMER_DURATION = 60;
+    let timer;
 
-  startButton.addEventListener('click', startGame);
-  submitButton.addEventListener('click', submitGuess);
-  resetButton.addEventListener('click', resetGame);
+    startButton.addEventListener('click', startGame);
+    submitButton.addEventListener('click', submitGuess);
+    resetButton.addEventListener('click', resetGame);
 
-  function startGame() {
-    startPage.style.display = 'none';
-    gamePage.style.display = 'block';
-    resetButton.classList.remove('d-none');
-    startTimer();
-    createNumberButtons();
-  }
-
-  function createNumberButtons() {
-    for (let i = 0; i <= 100; i++) {
-      const button = document.createElement('button');
-      button.textContent = i;
-      button.addEventListener('click', function () {
-        submitButton.disabled = false;
-        clearSelectedButtons();
-        button.classList.add('selected');
-      });
-      numberButtonsContainer.appendChild(button);
-    }
-  }
-
-  function clearSelectedButtons() {
-    const buttons = document.querySelectorAll('.number-buttons button');
-    buttons.forEach(button => button.classList.remove('selected'));
-  }
-
-  function submitGuess() {
-    const selectedButton = document.querySelector('.number-buttons button.selected');
-
-    if (!selectedButton) {
-      resultElement.textContent = 'Please select a number first.';
-      return;
+    function startGame() {
+        startPage.style.display = 'none';
+        gamePage.style.display = 'block';
+        resetButton.classList.remove('d-none');
+        startTimer();
+        createNumberInput();
     }
 
-    const userGuess = parseInt(selectedButton.textContent);
-    const botAverage = calculateBotAverage();
-    const winningThreshold = 0.8 * botAverage;
+    function createNumberInput() {
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.id = 'user-guess';
+        input.classList.add('form-control');
+        input.placeholder = 'Enter a number';
+        input.min = 0;
+        input.max = 100;
 
-    const bot1 = Math.floor(Math.random() * 101);
-    const bot2 = Math.floor(Math.random() * 101);
-    const bot3 = Math.floor(Math.random() * 101);
-
-    const botAnswers = `Bot 1: ${bot1}, Bot 2: ${bot2}, Bot 3: ${bot3}`;
-    const userAnswer = `Your guess: ${userGuess}`;
-
-    if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
-      resultElement.textContent = `Congratulations! You win. ${userAnswer} | ${botAnswers}`;
-    } else {
-      resultElement.textContent = `Sorry, you lose. ${userAnswer} | ${botAnswers}`;
+        numberButtonsContainer.appendChild(input);
     }
 
-    clearInterval(timer);
-    disableSubmitButton();
-  }
+    function submitGuess() {
+        const userGuessInput = document.getElementById('user-guess');
+        const userGuess = parseInt(userGuessInput.value);
 
-  function calculateBotAverage() {
-    const bot1 = Math.floor(Math.random() * 101);
-    const bot2 = Math.floor(Math.random() * 101);
-    const bot3 = Math.floor(Math.random() * 101);
+        if (isNaN(userGuess) || userGuess < 0 || userGuess > 100) {
+            resultElement.textContent = 'Please enter a valid number between 0 and 100.';
+            return;
+        }
 
-    return (bot1 + bot2 + bot3) / 3;
-  }
+        const botAverage = calculateBotAverage();
+        const winningThreshold = 0.8 * botAverage;
 
-  function resetGame() {
-    gamePage.style.display = 'none';
-    startPage.style.display = 'block';
-    resetButton.classList.add('d-none');
-    resetTimer();
-    resultElement.textContent = '';
-    clearNumberButtons();
-  }
+        const bot1 = Math.floor(Math.random() * 101);
+        const bot2 = Math.floor(Math.random() * 101);
+        const bot3 = Math.floor(Math.random() * 101);
 
-  function clearNumberButtons() {
-    numberButtonsContainer.innerHTML = '';
-  }
+        const botAnswers = `Bot 1: ${bot1}, Bot 2: ${bot2}, Bot 3: ${bot3}`;
+        const userAnswer = `Your guess: ${userGuess}`;
 
-  function startTimer() {
-    let seconds = TIMER_DURATION;
-    timerElement.textContent = seconds;
+        if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
+            resultElement.textContent = `Congratulations! You win. ${userAnswer} | ${botAnswers}`;
+        } else {
+            resultElement.textContent = `Sorry, you lose. ${userAnswer} | ${botAnswers}`;
+        }
 
-    timer = setInterval(function () {
-      seconds--;
-      timerElement.textContent = seconds;
-
-      if (seconds <= 0) {
         clearInterval(timer);
-        resultElement.textContent = 'Time is up! You lose.';
         disableSubmitButton();
-      }
-    }, 1000);
-  }
+    }
 
-  function resetTimer() {
-    clearInterval(timer);
-    timerElement.textContent = TIMER_DURATION;
-  }
+    function calculateBotAverage() {
+        const bot1 = Math.floor(Math.random() * 101);
+        const bot2 = Math.floor(Math.random() * 101);
+        const bot3 = Math.floor(Math.random() * 101);
 
-  function disableSubmitButton() {
-    submitButton.disabled = true;
-  }
-  // Your existing JavaScript code here
-  // You can add animations using Anime.js or other animation libraries.
+        return (bot1 + bot2 + bot3) / 3;
+    }
+
+    function resetGame() {
+        gamePage.style.display = 'none';
+        startPage.style.display = 'block';
+        resetButton.classList.add('d-none');
+        resetTimer();
+        resultElement.textContent = '';
+        clearNumberInput();
+    }
+
+    function clearNumberInput() {
+        numberButtonsContainer.innerHTML = '';
+    }
+
+    function startTimer() {
+        let seconds = TIMER_DURATION;
+        timerElement.textContent = seconds;
+
+        timer = setInterval(function () {
+            seconds--;
+            timerElement.textContent = seconds;
+
+            if (seconds <= 0) {
+                clearInterval(timer);
+                resultElement.textContent = 'Time is up! You lose.';
+                disableSubmitButton();
+            }
+        }, 1000);
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        timerElement.textContent = TIMER_DURATION;
+    }
+
+    function disableSubmitButton() {
+        submitButton.disabled = true;
+    }
 });
