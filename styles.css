@@ -28,28 +28,8 @@ body {
   margin-bottom: 20px;
 }
 
-/* Styles for number buttons */
-.number-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.number-buttons button {
-  margin: 8px;
-  padding: 14px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.number-buttons button.selected {
-  background-color: #2c3e50;
+#user-guess {
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 600px) {
@@ -59,10 +39,5 @@ body {
 
   .btn {
     padding: 12px 20px;
-  }
-
-  .number-buttons button {
-    margin: 6px;
-    padding: 12px;
   }
 }
