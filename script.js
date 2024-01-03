@@ -36,7 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function submitGuess() {
-    // Your existing submitGuess function
+    // Your existing submitGuess function logic here
+    // For example, you can add console.log to check if it's being called
+    console.log('Submit button clicked');
   }
 
   function resetGame() {
