@@ -7,8 +7,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const timerElement = document.getElementById('timer');
   const resultElement = document.getElementById('result');
   const numberButtonsContainer = document.getElementById('number-buttons');
+  const timerDurationElement = document.getElementById('timer-duration');
+  const thresholdPercentageElement = document.getElementById('threshold-percentage');
 
   const TIMER_DURATION = 60;
+  const WINNING_THRESHOLD_PERCENTAGE = 80;
   let timer;
 
   startButton.addEventListener('click', startGame);
@@ -19,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     startPage.style.display = 'none';
     gamePage.style.display = 'block';
     resetButton.classList.remove('d-none');
+    resetTimer();
     startTimer();
     createNumberButtons();
   }
@@ -51,13 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const userGuess = parseInt(selectedButton.textContent);
     const botAverage = calculateBotAverage();
-    const winningThreshold = 0.8 * botAverage;
+    const winningThreshold = (WINNING_THRESHOLD_PERCENTAGE / 100) * botAverage;
 
-    const bot1 = Math.floor(Math.random() * 101);
-    const bot2 = Math.floor(Math.random() * 101);
-    const bot3 = Math.floor(Math.random() * 101);
-
-    const botAnswers = `Bot 1: ${bot1}, Bot 2: ${bot2}, Bot 3: ${bot3}`;
+    const botAnswers = generateBotAnswers();
     const userAnswer = `Your guess: ${userGuess}`;
 
     if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
@@ -78,13 +78,21 @@ document.addEventListener('DOMContentLoaded', function () {
     return (bot1 + bot2 + bot3) / 3;
   }
 
+  function generateBotAnswers() {
+    const bot1 = Math.floor(Math.random() * 101);
+    const bot2 = Math.floor(Math.random() * 101);
+    const bot3 = Math.floor(Math.random() * 101);
+
+    return `Bot 1: ${bot1}, Bot 2: ${bot2}, Bot 3: ${bot3}`;
+  }
+
   function resetGame() {
     gamePage.style.display = 'none';
     startPage.style.display = 'block';
     resetButton.classList.add('d-none');
-    resetTimer();
     resultElement.textContent = '';
     clearNumberButtons();
+    resetTimer();
   }
 
   function clearNumberButtons() {
