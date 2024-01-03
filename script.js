@@ -20,27 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
     gamePage.style.display = 'block';
     resetButton.classList.remove('d-none');
     startTimer();
-    createNumberInput();
-  }
-
-  function createNumberInput() {
-    userNumberInput.disabled = false;
-    userNumberInput.addEventListener('input', handleNumberInput);
+    userNumberInput.value = '';
+    userNumberInput.removeAttribute('readonly');
     submitButton.disabled = true;
-  }
-
-  function handleNumberInput() {
-    const userGuess = parseInt(userNumberInput.value);
-
-    if (isNaN(userGuess) || userGuess < 0 || userGuess > 100) {
-      userNumberInput.setCustomValidity('Please enter a valid number between 0 and 100.');
-      submitButton.disabled = true;
-    } else {
-      userNumberInput.setCustomValidity('');
-      submitButton.disabled = false;
-    }
-
-    userNumberInput.reportValidity();
   }
 
   function submitGuess() {
@@ -68,7 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     clearInterval(timer);
-    disableSubmitButton();
+    submitButton.disabled = true;
+    userNumberInput.setAttribute('readonly', 'readonly');
   }
 
   function calculateBotAverage() {
@@ -85,13 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
     resetButton.classList.add('d-none');
     resetTimer();
     resultElement.textContent = '';
-    clearNumberInput();
-  }
-
-  function clearNumberInput() {
-    userNumberInput.value = '';
-    userNumberInput.disabled = true;
-    submitButton.disabled = true;
   }
 
   function startTimer() {
@@ -105,7 +81,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (seconds <= 0) {
         clearInterval(timer);
         resultElement.textContent = 'Time is up! You lose.';
-        disableSubmitButton();
+        userNumberInput.setAttribute('readonly', 'readonly');
+        submitButton.disabled = true;
       }
     }, 1000);
   }
@@ -113,9 +90,5 @@ document.addEventListener('DOMContentLoaded', function () {
   function resetTimer() {
     clearInterval(timer);
     timerElement.textContent = TIMER_DURATION;
-  }
-
-  function disableSubmitButton() {
-    submitButton.disabled = true;
   }
 });
