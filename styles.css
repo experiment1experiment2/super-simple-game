@@ -1,105 +1,71 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const startButton = document.getElementById('start-button');
-  const startPage = document.getElementById('start-page');
-  const gamePage = document.getElementById('game-page');
-  const submitButton = document.getElementById('submit-button');
-  const resetButton = document.getElementById('reset-button');
-  const timerElement = document.getElementById('timer');
-  const resultElement = document.getElementById('result');
-  const numberButtonsContainer = document.getElementById('number-buttons');
-  const userInput = document.getElementById('user-input');
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
 
-  const TIMER_DURATION = 60;
-  let timer;
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-  startButton.addEventListener('click', startGame);
-  submitButton.addEventListener('click', submitGuess);
-  resetButton.addEventListener('click', resetGame);
+.page {
+  text-align: center;
+}
 
-  function startGame() {
-    startPage.style.display = 'none';
-    gamePage.style.display = 'block';
-    resetButton.classList.remove('d-none');
-    startTimer();
-    createNumberButtons();
-  }
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-  function createNumberButtons() {
-    for (let i = 0; i <= 100; i++) {
-      const button = document.createElement('button');
-      button.textContent = i;
-      button.addEventListener('click', function () {
-        userInput.value = i;
-      });
-      numberButtonsContainer.appendChild(button);
-    }
-  }
+.btn-primary {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
 
-  function submitGuess() {
-    const userGuess = parseInt(userInput.value);
+.btn-secondary {
+  background-color: #95a5a6;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
 
-    if (isNaN(userGuess) || userGuess < 0 || userGuess > 100) {
-      resultElement.textContent = 'Please enter a valid number between 0 and 100.';
-      return;
-    }
+.timer {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
-    const botAverage = calculateBotAverage();
-    const winningThreshold = 0.8 * botAverage;
+.result {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
-    if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
-      resultElement.textContent = 'Congratulations! You win!';
-    } else {
-      resultElement.textContent = 'Sorry, you lose. Try again!';
-    }
+/* Styles for number buttons */
+.number-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-    clearInterval(timer);
-    disableSubmitButton();
-  }
+.number-buttons button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-  function calculateBotAverage() {
-    const bot1 = Math.floor(Math.random() * 101);
-    const bot2 = Math.floor(Math.random() * 101);
-    const bot3 = Math.floor(Math.random() * 101);
-
-    return (bot1 + bot2 + bot3) / 3;
-  }
-
-  function resetGame() {
-    gamePage.style.display = 'none';
-    startPage.style.display = 'block';
-    resetButton.classList.add('d-none');
-    resetTimer();
-    userInput.value = '';
-    resultElement.textContent = '';
-    clearNumberButtons();
-  }
-
-  function clearNumberButtons() {
-    numberButtonsContainer.innerHTML = '';
-  }
-
-  function startTimer() {
-    let seconds = TIMER_DURATION;
-    timerElement.textContent = seconds;
-
-    timer = setInterval(function () {
-      seconds--;
-      timerElement.textContent = seconds;
-
-      if (seconds <= 0) {
-        clearInterval(timer);
-        resultElement.textContent = 'Time is up! You lose.';
-        disableSubmitButton();
-      }
-    }, 1000);
-  }
-
-  function resetTimer() {
-    clearInterval(timer);
-    timerElement.textContent = TIMER_DURATION;
-  }
-
-  function disableSubmitButton() {
-    submitButton.disabled = true;
-  }
-});
+.number-buttons button.selected {
+  background-color: #3498db;
+  color: #fff;
+}
