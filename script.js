@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
         startPage.style.display = 'none';
         gamePage.style.display = 'block';
         resetButton.classList.remove('d-none');
+        resetTimer();
+        enableSubmitButton(); // Enable the submit button when starting the game
         startTimer();
     }
 
@@ -65,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resetTimer();
         resultElement.textContent = '';
         userGuessInput.value = ''; // Clear the input field
+        enableSubmitButton(); // Enable the submit button when resetting the game
     }
 
     function startTimer() {
@@ -90,5 +93,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function disableSubmitButton() {
         submitButton.disabled = true;
+    }
+
+    function enableSubmitButton() {
+        submitButton.disabled = false;
     }
 });
