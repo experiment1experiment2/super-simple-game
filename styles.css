@@ -74,3 +74,18 @@ h1 {
     background-color: #27ae60;
     border-color: #27ae60;
 }
+
+/* Additional styles for the updated button design */
+.input-group-append {
+    display: flex;
+}
+
+#submit-button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#user-guess {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
