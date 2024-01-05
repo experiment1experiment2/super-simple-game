@@ -29,25 +29,12 @@ body {
     margin-bottom: 20px;
 }
 
-#user-guess {
-    margin-bottom: 20px;
+/* Add the following styles for the updated layout */
+form {
+    text-align: center;
 }
 
-@media screen and (max-width: 600px) {
-    .container {
-        max-width: 90%;
-    }
-
-    .btn {
-        padding: 12px 20px;
-    }
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-.input-group {
+form > div {
     margin-bottom: 20px;
 }
 
@@ -73,19 +60,4 @@ h1 {
 .btn-secondary:hover {
     background-color: #27ae60;
     border-color: #27ae60;
-}
-
-/* Additional styles for the updated button design */
-.input-group-append {
-    display: flex;
-}
-
-#submit-button {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-#user-guess {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
 }
