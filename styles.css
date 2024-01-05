@@ -38,6 +38,10 @@ form > div {
     margin-bottom: 20px;
 }
 
+#user-guess {
+    text-align: center;
+}
+
 .display-4 {
     color: #2c3e50;
 }
