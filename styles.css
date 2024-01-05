@@ -29,17 +29,21 @@ body {
     margin-bottom: 20px;
 }
 
-/* Add the following styles for the updated layout */
+/* Updated styles for center alignment */
 form {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 form > div {
     margin-bottom: 20px;
+    width: 100%; /* Ensure full width on larger screens */
 }
 
 #user-guess {
     text-align: center;
+    width: 100%; /* Ensure full width on larger screens */
 }
 
 .display-4 {
