@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         gamePage.style.display = 'block';
         resetButton.classList.remove('d-none');
         resetTimer();
-        enableSubmitButton(); // Enable the submit button when starting the game
+        enableSubmitButton();
         startTimer();
     }
 
@@ -43,11 +43,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const userAnswer = `Your guess: ${userGuess}`;
         const calculatedAverage = `Calculated Average: ${botAverage.toFixed(2)}`;
 
+        let resultText;
+
         if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
-            resultElement.textContent = `Congratulations! You win. ${userAnswer} | ${botAnswers} | ${calculatedAverage}`;
+            resultText = `Congratulations! You win. <br>${userAnswer}  <br>${botAnswers}  <br>${calculatedAverage}`;
         } else {
-            resultElement.textContent = `Sorry, you lose. ${userAnswer} | ${botAnswers} | ${calculatedAverage}`;
+            resultText = `Sorry, you lose. <br>${userAnswer}  <br>${botAnswers}  <br>${calculatedAverage}`;
         }
+
+        resultElement.innerHTML = resultText;
 
         clearInterval(timer);
         disableSubmitButton();
@@ -67,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
         resetButton.classList.add('d-none');
         resetTimer();
         resultElement.textContent = '';
-        userGuessInput.value = ''; // Clear the input field
-        enableSubmitButton(); // Enable the submit button when resetting the game
+        userGuessInput.value = '';
+        enableSubmitButton();
     }
 
     function startTimer() {
