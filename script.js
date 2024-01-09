@@ -41,11 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const botAnswers = `Bot 1: ${bot1}, Bot 2: ${bot2}, Bot 3: ${bot3}`;
         const userAnswer = `Your guess: ${userGuess}`;
+        const calculatedAverage = `Calculated Average: ${botAverage.toFixed(2)}`;
 
         if (Math.abs(userGuess - winningThreshold) < Math.abs(botAverage - winningThreshold)) {
-            resultElement.textContent = `Congratulations! You win. ${userAnswer} | ${botAnswers}`;
+            resultElement.textContent = `Congratulations! You win. ${userAnswer} | ${botAnswers} | ${calculatedAverage}`;
         } else {
-            resultElement.textContent = `Sorry, you lose. ${userAnswer} | ${botAnswers}`;
+            resultElement.textContent = `Sorry, you lose. ${userAnswer} | ${botAnswers} | ${calculatedAverage}`;
         }
 
         clearInterval(timer);
